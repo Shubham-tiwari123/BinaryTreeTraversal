@@ -45,8 +45,11 @@ public class BinaryTreeTraversals {
                 case 7:node = t.getRoot();
                        t.reverseTreePath(node);
                        break;
+                case 8:node = t.getRoot();
+                       t.diagonalPrint(node);
+                       break;
             }
-        }while(choice!=8);
+        }while(choice!=9);
     }
     public static void main(String[] args) {
        BinaryTreeTraversals bt = new BinaryTreeTraversals();
