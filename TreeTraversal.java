@@ -273,4 +273,36 @@ public class TreeTraversal {
             System.out.print("\n"+temp.data);
         }
     }
+    
+    Node newNode(int key){
+        Node newNode = new Node();
+        newNode.data = key;
+        newNode.left = newNode.right = null;
+        return newNode;
+    }
+    
+    void diagonalPrint(Node node){
+	Queue<Node> q = new LinkedList<>();
+	Node sentinel = newNode(-1);
+	while (node!=null){
+            q.add(node);
+            node = node.right;
+	}
+	q.add(sentinel);
+	while (q.size() != 1){
+            Node front = q.poll();
+            if (front != sentinel){
+                System.out.println("\n"+front.data);
+                Node node1 = front.left;
+                while (node1!=null){
+                    q.add(node1);
+                    node1 = node1.right;
+                }
+            }
+            else{
+                q.add(sentinel);
+                System.out.print("\n");
+            }
+	}
+    }
 }
