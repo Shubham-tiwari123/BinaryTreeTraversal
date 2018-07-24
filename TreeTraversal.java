@@ -305,4 +305,94 @@ public class TreeTraversal {
             }
 	}
     }
+    void printBoundaryRight(Node node){
+        if (node != null) 
+        {
+            if (node.right != null) 
+            {
+                printBoundaryRight(node.right);
+                System.out.print(node.data + " ");
+            } 
+            else if (node.left != null) 
+            {
+                printBoundaryRight(node.left);
+                System.out.print(node.data + " ");
+            }
+        }
+    }
+    void printBoundary(Node node){
+        if (node != null) 
+        {
+            System.out.print(node.data + " ");
+            printBoundaryLeft(node.left);
+            printLeaves(node.left);
+            printLeaves(node.right);
+            printBoundaryRight(node.right);
+        }
+    }
+     
+    void printLeaves(Node node){
+        if (node != null) 
+        {
+            printLeaves(node.left);
+  
+            // Print it if it is a leaf node
+            if (node.left == null && node.right == null)
+                System.out.print(node.data + " ");
+            printLeaves(node.right);
+        }
+    }
+    void printBoundaryLeft(Node node){
+        if (node != null) 
+        {
+            if (node.left != null) 
+            {
+                System.out.print(node.data + " ");
+                printBoundaryLeft(node.left);
+            } 
+            else if (node.right != null) 
+            {
+                System.out.print(node.data + " ");
+                printBoundaryLeft(node.right);
+            }
+        }
+    }
+    
+    void densityOfTree(int size,Node node){
+        int count=0;
+        Queue<Node> q = new LinkedList<>();
+        Queue<Node> q1 = new LinkedList<>();
+        q.add(root);
+        System.out.print("\n");
+        while(!q.isEmpty()||!q.isEmpty()){
+            while(!q.isEmpty()){
+                temp = q.poll();
+                if(temp.right!=null)
+                    q1.add(temp.right);
+                if(temp.left!=null)
+                    q1.add(temp.left);
+                count++;
+            }
+            while(!q1.isEmpty()){
+                temp = q1.poll();
+                if(temp.left!=null)
+                    q.add(temp.left);
+                if(temp.right!=null)
+                    q.add(temp.right);
+                count++;
+            }
+        }
+        int height = count;
+        int density = size/height;
+        System.out.print("\nDensity of tree "+density);
+    }
+    
+    void countTrees(int n){
+        int A[] = new int[n+1];
+        A[0] = A[1] = 1;
+        for (int i = 2;i <= n;++i) 
+            for (int j = 0; j < i; j++)
+                A[i] += A[j] * A[i - j - 1];
+        System.out.print("\nTotal Possible Binary Tree are :"+A[n]);
+    }
 }
